@@ -1,0 +1,18 @@
+Automates the installation of Emacs Lisp files from [git|svn|cvs] repository.
+
+Installation:
+
+(1) put bundle.el somewhere, for example ~/.emacs.d/bundle.el
+(2) and load this file in your ~/.emacs.d/init.el like this:
+    (load "~/.emacs.d/bundle.el")
+(3) M-x bundle-install-git
+(4) input git repository url like:
+    https://github.com/m2ym/auto-complete.git
+    or
+    git://repo.or.cz/anything-config.git
+(5) load installed elisp
+    M-x load-library auto-complete or M-x load-library anything-config
+    or append following lines to ~/.emacs.d/init.el
+    ;; ~/.emacs.d/init.el
+    (require 'auto-complete)
+    (require 'anything-config)
