@@ -1,7 +1,6 @@
 ;;; bundle.el --- Emacs version of vundle.vim
 
 (require 'cl)
-(setq debug-on-error t)
 
 (defvar bundle-install-directory "~/.emacs.d/bundle")
 
