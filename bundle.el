@@ -3,7 +3,7 @@
 
 (require 'cl)
 
-(defvar bundle-install-directory "~/.emacs.d/bundle")
+(defvar bundle-install-directory (expand-file-name "~/.emacs.d/bundle"))
 
 (unless (file-exists-p bundle-install-directory)
   (shell-command (concat "mkdir " bundle-install-directory)))
