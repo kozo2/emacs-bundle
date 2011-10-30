@@ -4,12 +4,14 @@
 (require 'cl)
 
 (defvar bundle-install-directory (expand-file-name "~/.emacs.d/bundle"))
+(defvar bundle-init-filename "init-bundle.el")
+(defvar bundle-init-filepath (concat bundle-install-directory "/" bundle-init-filename))
 
 (unless (file-exists-p bundle-install-directory)
   (shell-command (concat "mkdir " bundle-install-directory)))
 
-(unless (file-exists-p (concat bundle-install-directory "/" "init-bundle.el"))
-  (shell-command (concat "touch " (concat bundle-install-directory "/" "init-bundle.el"))))
+(unless (file-exists-p bundle-init-filepath)
+  (shell-command (concat "touch " bundle-init-filepath)))
 
 (defvar bundle-install-last-url nil
   "The last url used in `bundle-install-from-url'.")
