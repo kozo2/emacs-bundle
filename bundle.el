@@ -1,4 +1,4 @@
-;;; bundle.el --- Emacs version of vundle.vim
+g;;; bundle.el --- Emacs version of vundle.vim
 ;; bundle.el is distributed under the term of GPLv3.
 
 (require 'cl)
@@ -44,8 +44,7 @@
     
     (deferred:error it ;
       (lambda (err)
-	(insert "Can not get a clone! : " err)))
-)
+	(insert "Can not get a clone! : " err))))
 
 ;  (setq bundle-init-path (format (concat bundle-install-directory "/" "init-bundle.el")))
 ;  (shell-command bundle-git-clone)
