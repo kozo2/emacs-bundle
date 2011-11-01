@@ -1,4 +1,4 @@
-g;;; bundle.el --- Emacs version of vundle.vim
+;;; bundle.el --- Emacs version of vundle.vim
 ;; bundle.el is distributed under the term of GPLv3.
 
 (require 'cl)
