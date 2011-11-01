@@ -9,9 +9,11 @@
 
 (unless (file-exists-p bundle-install-directory)
   (shell-command (concat "mkdir " bundle-install-directory)))
-
 (unless (file-exists-p bundle-init-filepath)
   (shell-command (concat "touch " bundle-init-filepath)))
+(load bundle-init-filepath)
+
+;(require 'deferred)
 
 (defvar bundle-install-last-url nil
   "The last url used in `bundle-install-from-url'.")
@@ -21,14 +23,32 @@
   (interactive)
   (or url (setq url (read-string (format "URL (%s):" (or bundle-install-last-url "")) nil nil bundle-install-last-url)))
   (setq bundle-install-last-url url)
-  (message (format "cloning...: %s" bundle-install-last-url))
+
   (setq bundle-install-path (format (concat bundle-install-directory "/" (file-name-sans-extension (file-name-nondirectory bundle-install-last-url)))))
-  (setq bundle-git-clone (format (concat "git clone " bundle-install-last-url " " bundle-install-path)))
-  (setq bundle-init-path (format (concat bundle-install-directory "/" "init-bundle.el")))
-  (shell-command bundle-git-clone)
-  (add-to-list 'load-path bundle-install-path)
-  (append-to-file (concat "(add-to-list 'load-path \"" bundle-install-path "\")\n") nil bundle-init-path)
-  (load (concat bundle-install-directory "/" "init-bundle.el"))
+
+  (deferred:$
+;    (deferred:process-shell ("git" "clone" bundle-git-clone))
+    (deferred:process "git" "clone" bundle-install-last-url bundle-install-path)
+;    (deferred:process ("ls"))
+;  (setq bundle-git-clone (format (concat "git clone " bundle-install-last-url " " bundle-install-path)))
+    (deferred:nextc it
+      (lambda ()
+;	(message (format "cloning...: %s" bundle-install-last-url))
+	(message (format "cloning...: %s" (concat "git clone " bundle-install-last-url " " bundle-install-path)))
+;    (deferred:nextc it
+	(add-to-list 'load-path bundle-install-path)
+;    (deferred:nextc it
+	(append-to-file (concat "(add-to-list 'load-path \"" bundle-install-path "\")\n") nil bundle-init-path)
+;    (deferred:nextc it
+	(load (concat bundle-install-directory "/" "init-bundle.el"))))
+    
+    (deferred:error it ;
+      (lambda (err)
+	(insert "Can not get a clone! : " err)))
+)
+
+;  (setq bundle-init-path (format (concat bundle-install-directory "/" "init-bundle.el")))
+;  (shell-command bundle-git-clone)
 )
 
 ;; (defun bundle-install-svn (&optional url)
