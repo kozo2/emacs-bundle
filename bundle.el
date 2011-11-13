@@ -32,7 +32,7 @@
       (lambda ()
 	(message (format "cloning...: %s" (concat "git clone " bundle-install-last-url " " bundle-install-path)))
 	(add-to-list 'load-path bundle-install-path)
-	(append-to-file (concat "(add-to-list 'load-path \"" bundle-install-path "\")\n") nil bundle-init-path)
+	(append-to-file (concat "(add-to-list 'load-path \"" bundle-install-path "\")\n") nil bundle-init-filepath)
 	(load (concat bundle-install-directory "/" "init-bundle.el"))))
     
     (deferred:error it ;
