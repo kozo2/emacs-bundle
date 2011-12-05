@@ -24,17 +24,18 @@
   (or url (setq url (read-string (format "URL (%s):" (or bundle-install-last-url "")) nil nil bundle-install-last-url)))
   (setq bundle-install-last-url url)
 
-  (setq bundle-install-path (format (concat bundle-install-directory "/" (file-name-sans-extension (file-name-nondirectory bundle-install-last-url)))))
+  (lexical-let* ((dirname (file-name-sans-extension (file-name-nondirectory bundle-install-last-url)))
+                 (install-path (concat bundle-install-directory "/" dirname))
+                 (copyed-url url))
+      (deferred:$
+        (deferred:process "git" "clone" bundle-install-last-url install-path)
+        (deferred:nextc it
+          (lambda ()
+            (message (format "cloning...: %s" (concat "git clone " bundle-install-last-url " " install-path)))
+            (add-to-list 'load-path install-path)
+            (append-to-file (concat "(add-to-list 'load-path \"" install-path "\")\n") nil bundle-init-filepath)
+            (load (concat bundle-install-directory "/" "init-bundle.el"))))
 
-  (deferred:$
-    (deferred:process "git" "clone" bundle-install-last-url bundle-install-path)
-    (deferred:nextc it
-      (lambda ()
-	(message (format "cloning...: %s" (concat "git clone " bundle-install-last-url " " bundle-install-path)))
-	(add-to-list 'load-path bundle-install-path)
-	(append-to-file (concat "(add-to-list 'load-path \"" bundle-install-path "\")\n") nil bundle-init-filepath)
-	(load (concat bundle-install-directory "/" "init-bundle.el"))))
-    
-    (deferred:error it ;
-      (lambda (err)
-	(insert "Can not get a clone! : " err)))))
+        (deferred:error it ;
+          (lambda (err)
+            (insert "Can not get a clone! : " err))))))
