@@ -2,6 +2,7 @@
 ;; bundle.el is distributed under the term of GPLv3.
 
 (require 'cl)
+(require 'deferred)
 
 (defvar bundle-install-directory (expand-file-name "~/.emacs.d/bundle"))
 (defvar bundle-init-filename "init-bundle.el")
@@ -12,8 +13,6 @@
 (unless (file-exists-p bundle-init-filepath)
   (shell-command (concat "touch " bundle-init-filepath)))
 (load bundle-init-filepath)
-
-;(require 'deferred)
 
 (defvar bundle-install-last-url nil
   "The last url used in `bundle-install-from-url'.")
