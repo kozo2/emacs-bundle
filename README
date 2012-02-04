@@ -15,7 +15,7 @@ Usage:
 (2) input elisp git repository url like:
     git://github.com/m2ym/auto-complete
     or
-    git://repo.or.cz/anything-config.git
+    git://repo.or.cz/anything-config
 (3) load installed elisp by bundle.el
     M-x load-library auto-complete or M-x load-library anything-config
     or append following lines to ~/.emacs.d/init.el
