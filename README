@@ -13,7 +13,7 @@ Usage:
 
 (1) M-x bundle-install-git
 (2) input elisp git repository url like:
-    git://github.com/m2ym/auto-complete.git
+    git://github.com/m2ym/auto-complete
     or
     git://repo.or.cz/anything-config.git
 (3) load installed elisp by bundle.el
