@@ -1,5 +1,5 @@
 bundle.el automates the installation of Emacs Lisp files from git repository.
-bundle.el downloads elisps and add the path to load-path.
+bundle.el downloads elisp and adds the path to load-path.
 
 Installation:
 
