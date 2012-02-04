@@ -1,16 +1,22 @@
-Automates the installation of Emacs Lisp files from [git|svn|cvs] repository.
+bundle.el automates the installation of Emacs Lisp files from git repository.
+bundle.el downloads elisps and add the path to load-path.
 
 Installation:
 
-(1) put bundle.el somewhere, for example ~/.emacs.d/bundle.el
-(2) and load this file in your ~/.emacs.d/init.el like this:
-    (load "~/.emacs.d/bundle.el")
-(3) M-x bundle-install-git
-(4) input git repository url like:
-    https://github.com/m2ym/auto-complete.git
+(0) bundle.el uses git, please install git first.
+(1) clone emacs-bundle repository somewhere "git clone git://github.com/kozo2/emacs-bundle"
+(2) bundle.el depends on kiwanami's emacs-deferred, please clone emacs-deferred "cd emacs-bundle && git submodule init && git submodule update"
+(3) add emacs-deferred repository to load-path (add-to-list 'load-path "~/emacs-bundle/emacs-deferred/")
+(4) load bundle.el in emacs-bundle repository (load "~/emacs-bundle/bundle.el")
+
+Usage:
+
+(1) M-x bundle-install-git
+(2) input elisp git repository url like:
+    git://github.com/m2ym/auto-complete.git
     or
     git://repo.or.cz/anything-config.git
-(5) load installed elisp
+(3) load installed elisp by bundle.el
     M-x load-library auto-complete or M-x load-library anything-config
     or append following lines to ~/.emacs.d/init.el
     ;; ~/.emacs.d/init.el
