@@ -4,21 +4,17 @@ bundle.el downloads elisp and adds the path to load-path.
 Installation:
 
 (0) bundle.el uses git, please install git first.
-(1) clone emacs-bundle repository somewhere "git clone git://github.com/kozo2/emacs-bundle"
-(2) bundle.el depends on kiwanami's emacs-deferred, please clone emacs-deferred "cd emacs-bundle && git submodule init && git submodule update"
-(3) add emacs-deferred repository to load-path (add-to-list 'load-path "~/emacs-bundle/emacs-deferred/")
-(4) load bundle.el in emacs-bundle repository (load "~/emacs-bundle/bundle.el")
+(1) bundle.el depends on kiwanami's emacs-deferred, please install emacs-deferred
+(2) clone emacs-bundle repository somewhere "git clone git://github.com/kozo2/emacs-bundle"
+(3) load bundle.el in emacs-bundle repository (load "~/emacs-bundle/bundle.el")
 
 Usage:
 
 (1) M-x bundle-install-git
 (2) input elisp git repository url like:
     git://github.com/m2ym/auto-complete
-    or
-    git://repo.or.cz/anything-config
 (3) load installed elisp by bundle.el
-    M-x load-library auto-complete or M-x load-library anything-config
+    M-x load-library auto-complete
     or append following lines to ~/.emacs.d/init.el
     ;; ~/.emacs.d/init.el
     (require 'auto-complete)
-    (require 'anything-config)
