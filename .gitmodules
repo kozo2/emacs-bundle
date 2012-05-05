@@ -1,3 +1,0 @@
-[submodule "emacs-deferred"]
-	path = emacs-deferred
-	url = https://github.com/kiwanami/emacs-deferred.git
