@@ -1,0 +1,3 @@
+[submodule "emacs-deferred"]
+	path = emacs-deferred
+	url = git@github.com:kozo2/emacs-deferred.git
